@@ -1,6 +1,6 @@
 package jh.springboot.restapi.controller;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import jh.springboot.restapi.config.auth.PrincipalDetails;
 import jh.springboot.restapi.dto.CommentDto;
 import jh.springboot.restapi.repository.UserRepository;
@@ -19,7 +19,7 @@ public class CommentController {
     private final UserRepository userRepository;
 
     // 댓글 작성
-    @ApiOperation(value = "댓글 작성", notes = "댓글을 작성한다.")
+    @Operation(summary = "댓글 작성", description = "댓글을 작성한다.")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/comments/{boardId}")
     public Response writeComment(@PathVariable("boardId") Integer boardId, @RequestBody CommentDto commentDto, Authentication authentication) {
@@ -32,7 +32,7 @@ public class CommentController {
 
 
     // 게시글에 달린 댓글 모두 불러오기
-    @ApiOperation(value = "댓글 불러오기", notes = "게시글에 달린 댓글을 모두 불러온다.")
+    @Operation(summary = "댓글 불러오기", description = "게시글에 달린 댓글을 모두 불러온다.")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/comments/{boardId}")
     public Response getComments(@PathVariable("boardId") Integer boardId) {
@@ -41,7 +41,7 @@ public class CommentController {
 
 
     // 댓글 삭제
-    @ApiOperation(value = "댓글 삭제", notes = "게시글에 달린 댓글을 삭제합니다.")
+    @Operation(summary = "댓글 삭제", description = "게시글에 달린 댓글을 삭제합니다.")
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/comments/{boardId}/{commentId}")
     public Response deleteComment(@PathVariable("boardId") Integer boardId, @PathVariable("commentId") Integer commentId, Authentication authentication) {
